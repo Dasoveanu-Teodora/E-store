@@ -1,37 +1,24 @@
-Dasovenau Teodora 
-324AA
-Am implementat intregul enunt al temei.
+I  implemented a store that includes source files and headers for
+Products, which are of two types, food and non-food, derived from the basic class Product. Non-food products in turn are a parent class for discounted and returned products. Resealed products are both discounted and returned. This is where the Dead Diamound problem comes in, which we avoid by virtualizing the parent classes, that is, for the reduced products and the one with the returned products. Thus we must call the manufacturers and the specific methods for the attributes from non-food products for the handling of a resealed product time object.
+The user hierarchy includes the aggregate class Address, which includes the location data, which is in the general user class, which contains details for the purchase. There are two types of users, one Basic who has to pay the cost of transport and another who has discounts and does not have to pay the transport, but who has to pay a subscription, premiumSubscription.
 
-Am creat un magazin ce include fisiere sursa si header-e pentru
-Produse, ce sunt de doua tipuri, alimentare si nealimentare, derivate din clasa de baza Produs. Produsele nealimenatare la randul lor sunt o clasa parinte pentru produsele cu reduceri si cele returnate. Produsele resigilate sunt atat reduse, cat si returnate. Aici apare problema Dead diamound pe care o evitam prin virtualizarea claselor parinte, adica cea pentru produsele reduse si cea cu produsele returnate. Astfel trebuie sa apelam constructorii si metodele specifice pentru atributele din produse nealimentare pentru manevrarea unui obiect de timp produs resigilat. 
-Ierarhia utilizatorilor cuprinde clasa agregata Adresa, ce cuprinde datele de localizare, ce se gaseste in clasa utilizatorului general, in care se afla detalii pentru achizitionare. Sunt doua tipuri de utilizatori, unul Basic ce trebuie sa isi plateasca costul transportului si altul ce are reduceri si nu trebuie sa plateasca transportul, dar care trebuie sa plateasca un abonament, premiumSubscription.
+ In the shopping cart we have a container in which we add products, these are identified by a key that represents the product id that is in the Product class.
+Also here we have added options to remove an object from the cart or add it: lowerQuantity and raiseQuantity. When we want to remove an object from the basket we use deleteProduct.
 
-In caruciorul de cumparaturi avem un container in care adugam produse, acestea sunt indentificate printr-o cheie ce reprezinta id-ul produsului ce se gaseste in clasa Produs.
-Tot aici am adaugat optiuni de scoaterea unui obiect din carucior sau adaugarea sa: lowerQuantity si raiseQuantity. In momentul in care vrem sa scoatem un obiect din cos folosim  deleteProduct.
+The Server class links all operations, contains the list of products and users, and a container for identifying each user's cart.
+Here are the functions for adding and deleting products from the cart.
+Mainly, I chose to go through the cart and find out if I have any key what the id is looking for. If I found it, I test to see if I have the product valid on the server and if I can perform the necessary operations on it.
+To check if a user is not found, respectively a product, I chose to increment a counter whenever the ids do not match.
+Thus, if an id never appears, the number of occurrences will be maximum, ie the number of products / ids on the server, so I return false.
 
-Clasa Server leaga toate operatiile, contine lista de produse si de utilizatori si un container pentru indentificarea caruciorului fiecarui utilizator.
-Aici se remarca functiile de adaugare si de stergere a produselor din carucior.
+Query Solver is a class with which we query
+data from the server, basically go through the lists, test the necessary conditions, sort the list where appropriate.
+The most interesting thing was to see how a dynamic cast works, we can call methods for a derived object that is in an inhomogeneous list of pointers to the parent class type.
 
-In principiu am ales sa parcurg caruciorul si sa sa caut daca am vreo cheie ce este id-ul cautat. Daca am gasit-o, testez sa vad daca am produsul respectiv valabil in server si daca pot efectua asupra lui operatiile necesare.
-Pentru a verifica daca un utilizator nu este gasit, respectiv un produs, am ales sa incrementez un contor de cate ori id-urile nu corespund.
-Astfel, daca un id nu apare niciodata, numarul ocurentelor va fi maxim, adica numarul produselor/id-urilor din server, deci returnez fals.
+In working with LRU cahe the most important is the implementation of processRequests in which they build the lru vector of the given capacity and make successive permutations, making sure that the numbers are not repeated to create the ids corresponding to the requests
 
-Query Solver este o clasa cu ajutorul careia facem interogari asupra 
-datelor din server, in mare parcurg listele, testez conditiile necesare, sortez lista unde este cazul.
-Cel mai interesant a fost sa observam cum functioneaza un dynamic cast, putem apela metode pentru un obiect derivat ce se afla intr-o lista neomogena de pointeri la tipul clasa parinte.
+In the utility class we implemented the necessary ones for the different types of list sources, we implemented comparison functions between two products or two users.
 
-In lucrul cu LRU cahe cea mai importanta este implementarea processRequests in care construiesc vectorul lru de capacitatea data si fac permutari succesive, asigurandu-ma ca cifrele nu se repeta pentru a a crea id-urile corespunzatoare request-urilor
+Otherwise, for all the classes in the Product, User, Server, LRU cache, Shopping Cart Hierarchies, we implemented the get-sets and sets, as well as the operators necessary for a better handling.
 
-In clasa utility am implementat cele necesare diferitelor tipuri de soratri ale listelor, am implementat functii de comparare dintre doua produse sau doi utilizatori.
 
-In rest pentru toate clasele din Ierarhiile Produs, User, din Server, LRU cache, Shopping Cart  am implementat get-erele si set-erele, cat si operatorii necesari pentru o mai buna manipulare.
-
-Consider ca tema este utila pentru lucrul cu containere si descoperirea  metodelor puse deja la dispozitie de acestea, o gestionare mai rapida a informatiilor si este mai putin de implementat multumita acestora. Dezvolta si lucrul in echipa, pentru ca aveam deja implementat scheletul proiectului, noi a trebuit s aintelegm ce trebuie implementat.
-
-Consider implementarea eficienta pentru ierarhiile produs si user, Lru cache, Shopping Cart.
-
-Pentru bonus, cred ca era mai eficienta o modularizare, sa creem separat interogari pentru starea obiectului din cos, pe care le combinam in final in obtinerea functiei. Au fost cateva metode ajutatoare implementate in Produs si Shopping Cart, dar cred isi mai aveau locul niste interogari separate de tipul exista userul in lista, de cate ori, pe ce pozitie, dar produsul.
-
-Am intampinat dificultati cu precadere la BONUS, am refacut de trei ori algoritmul, probabil ca sunt o gramada de modaliati in care putem testa, mie asa mi s-a parut cel mai usor de inteles.
-
-Nu am intampinat corner cases sau alte lipsuri. La inceput am avut  problema pentru 3.f, ca nu mi-am dat seama ca  in server sunt mai multi useri cu acelasi id, deci e bine sa verificam mai des ocw-ul cand avem proiecte, laboratoare de facut.
